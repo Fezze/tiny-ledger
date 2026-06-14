@@ -18,8 +18,10 @@ public final class Account {
         this.balance = balance;
     }
 
-    public static Account open(Money openingBalance) {
-        return new Account(UUID.randomUUID(), openingBalance);
+    public static AccountOpening open(Money openingBalance) {
+        Account account = new Account(UUID.randomUUID(), openingBalance);
+        LedgerTransaction ledgerTransaction = LedgerTransaction.openingBalance(account.id, openingBalance);
+        return new AccountOpening(account, ledgerTransaction);
     }
 
     public UUID id() {
@@ -30,8 +32,28 @@ public final class Account {
         return balance;
     }
 
-    public AccountSnapshot snapshot() {
-        return new AccountSnapshot(id, balance);
+    public LedgerTransaction deposit(Money amount) {
+        requirePositiveMovement(amount);
+        balance = balance.add(amount);
+        return LedgerTransaction.deposit(this.id, amount);
+    }
+
+    public LedgerTransaction withdraw(Money amount) {
+        requirePositiveMovement(amount);
+        if (balance.isLessThan(amount)) {
+            throw new RuntimeException("Insufficient funds");
+        }
+        balance = balance.subtract(amount);
+        return LedgerTransaction.withdrawal(this.id, amount);
+    }
+
+    private void requirePositiveMovement(Money amount) {
+        if (amount == null) {
+            throw new RuntimeException("Amount is required");
+        }
+        if (!amount.isPositive()) {
+            throw new RuntimeException("Amount must be greater than zero");
+        }
     }
 
 }

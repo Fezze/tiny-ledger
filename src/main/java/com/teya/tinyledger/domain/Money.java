@@ -36,7 +36,7 @@ public record Money(BigDecimal amount) implements Comparable<Money> {
         return amount.signum() > 0;
     }
 
-    public boolean isLessThat(Money other) {
+    public boolean isLessThan(Money other) {
         return amount.compareTo(other.amount) < 0;
     }
 
