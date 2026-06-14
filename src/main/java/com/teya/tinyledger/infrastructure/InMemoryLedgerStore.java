@@ -4,9 +4,11 @@ import com.teya.tinyledger.domain.Account;
 import com.teya.tinyledger.domain.AccountOpening;
 import com.teya.tinyledger.domain.LedgerTransaction;
 import com.teya.tinyledger.domain.Money;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class InMemoryLedgerStore {
 
     private final Map<UUID, Account> accountsById = new HashMap<>();
@@ -40,7 +42,7 @@ public class InMemoryLedgerStore {
         return ledgerTransactions;
     }
 
-    private Account getAccount(UUID accountId) {
+    public Account getAccount(UUID accountId) {
         return Optional.ofNullable(accountsById.get(accountId))
                 .orElseThrow(() -> new RuntimeException("Account not found: " + accountId));
     }
