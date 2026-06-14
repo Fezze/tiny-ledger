@@ -1,4 +1,4 @@
-package com.teya.tinyledger.error;
+package com.teya.tinyledger.api.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -13,19 +13,19 @@ public final class LedgerTransaction {
 
     private LedgerTransaction(UUID id, UUID accountId, TransactionType type, Money amount, Instant createdAt) {
         if (id == null) {
-            throw new IllegalArgumentException("Transaction id is required");
+            throw new RuntimeException("Transaction id is required");
         }
         if (accountId == null) {
-            throw new IllegalArgumentException("Account id is required");
+            throw new RuntimeException("Account id is required");
         }
         if (type == null) {
-            throw new IllegalArgumentException("Transaction type is required");
+            throw new RuntimeException("Transaction type is required");
         }
         if (amount == null) {
-            throw new IllegalArgumentException("Transaction amount is required");
+            throw new RuntimeException("Transaction amount is required");
         }
         if (createdAt == null) {
-            throw new IllegalArgumentException("Transaction creation time is required");
+            throw new RuntimeException("Transaction creation time is required");
         }
         this.id = id;
         this.accountId = accountId;
@@ -34,15 +34,15 @@ public final class LedgerTransaction {
         this.createdAt = createdAt;
     }
 
-    public static LedgerTransaction openingBalance(UUID accountId, Money amount) {
+    static LedgerTransaction openingBalance(UUID accountId, Money amount) {
         return new LedgerTransaction(UUID.randomUUID(), accountId, TransactionType.OPENING_BALANCE, amount, Instant.now());
     }
 
-    public static LedgerTransaction deposit(UUID accountId, Money amount) {
+    static LedgerTransaction deposit(UUID accountId, Money amount) {
         return new LedgerTransaction(UUID.randomUUID(), accountId, TransactionType.DEPOSIT, amount, Instant.now());
     }
 
-    public static LedgerTransaction withdrawal(UUID accountId, Money amount) {
+    static LedgerTransaction withdrawal(UUID accountId, Money amount) {
         return new LedgerTransaction(UUID.randomUUID(), accountId, TransactionType.WITHDRAWAL, amount, Instant.now());
     }
 

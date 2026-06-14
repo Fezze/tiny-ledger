@@ -1,4 +1,4 @@
-package com.teya.tinyledger.error;
+package com.teya.tinyledger.api.error;
 
 public record ErrorResponse(String message) {
 }
