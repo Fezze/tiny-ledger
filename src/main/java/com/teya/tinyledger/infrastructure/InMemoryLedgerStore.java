@@ -36,7 +36,7 @@ public class InMemoryLedgerStore {
 
     private List<LedgerTransaction> getLedgerTransactions(UUID accountId) {
         List<LedgerTransaction> ledgerTransactions = transactionsByAccountId.get(accountId);
-        if( ledgerTransactions == null ){
+        if (ledgerTransactions == null) {
             throw new RuntimeException("Account not found: " + accountId);
         }
         return ledgerTransactions;

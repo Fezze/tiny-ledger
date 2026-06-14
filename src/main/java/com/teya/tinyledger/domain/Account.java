@@ -7,11 +7,11 @@ public final class Account {
     private final UUID id;
     private Money balance;
 
-    private Account(UUID id, Money balance){
-        if(id == null) {
+    private Account(UUID id, Money balance) {
+        if (id == null) {
             throw new RuntimeException("Account id is required");
         }
-        if(balance == null) {
+        if (balance == null) {
             throw new RuntimeException("Account balance is required");
         }
         this.id = id;

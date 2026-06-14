@@ -21,7 +21,7 @@ public class LedgerService {
     }
 
     public LedgerTransaction openAccount(BigDecimal initialBalance) {
-        AccountOpening opening =  Account.open(Money.of(initialBalance));
+        AccountOpening opening = Account.open(Money.of(initialBalance));
         store.save(opening);
         return opening.openingTransaction();
     }

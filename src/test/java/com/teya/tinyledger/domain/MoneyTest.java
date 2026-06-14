@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class MoneyTest {
 
     @Test
-    void normalisesAmountToTwoDecimalPlaces(){
+    void normalisesAmountToTwoDecimalPlaces() {
         Money money = Money.of(new BigDecimal("10"));
 
         assertThat(money.amount()).isEqualByComparingTo("10.00");
@@ -37,7 +37,7 @@ class MoneyTest {
 
     @Test
     void rejectNegativeAmount() {
-        assertThatThrownBy( () -> Money.of(new BigDecimal("-1.00")))
+        assertThatThrownBy(() -> Money.of(new BigDecimal("-1.00")))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("Amount must not be negative");
     }
